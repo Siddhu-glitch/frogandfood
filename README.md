@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -505,7 +504,7 @@ button:hover{
       <p>
         If your head hurts,
         stay here for a while.
-        I made this tiny peaceful place just for you.
+        this tiny peaceful place just for you.
       </p>
     </div>
 

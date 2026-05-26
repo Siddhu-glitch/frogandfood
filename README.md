@@ -1,8 +1,17 @@
+This is the perfect next step. To make sure it looks beautiful no matter what device she opens it on (her phone, a tablet, or a wide laptop screen), we need to make the layout **fully responsive**.
 
+The main issue on laptops is that if the frogs are glued to the edges of the screen, they will be super far away from the center box on a wide monitor. To fix this, I have updated the code so the frogs "hug" the center box perfectly on a laptop, and gracefully tuck themselves into the sides of the glass box on a phone.
+
+Here is the ultimate, fully responsive version. Just copy this whole block and replace your `index.html` code.
+
+*(Note: Don't forget to add that blank `.nojekyll` file to your GitHub repository so GitHub stops injecting that ugly blue "frogandfood" title at the top!)*
+
+```html
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>For Likhitha 🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -46,7 +55,7 @@ body.theme-night {
   --celestial-color: #fca311;
 }
 
-/* HEADACHE MODE (Dims everything gently) */
+/* HEADACHE MODE */
 body.headache-mode {
   filter: brightness(0.55) contrast(0.9) saturate(0.8);
 }
@@ -62,7 +71,8 @@ body.headache-mode {
 
 body {
   overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100dvh; /* Adapts to phone browser bars */
   background: linear-gradient(180deg, var(--bg-top), var(--bg-mid), var(--bg-bottom));
   display: flex;
   justify-content: center;
@@ -72,8 +82,8 @@ body {
 
 /* AMBIENT BACKGROUND ELEMENTS */
 .cloud { position: absolute; font-size: 60px; opacity: 0.6; animation: drift 40s linear infinite; z-index: 0; }
-.cloud1 { top: 15%; left: -10%; }
-.cloud2 { top: 40%; left: -20%; animation-delay: 15s; font-size: 80px; }
+.cloud1 { top: 10%; left: -10%; }
+.cloud2 { top: 35%; left: -20%; animation-delay: 15s; font-size: 80px; }
 
 @keyframes drift {
   0% { transform: translateX(-10vw); }
@@ -95,31 +105,36 @@ body {
 }
 @keyframes shoot { 0% { right: -10%; top: 10%; opacity: 1; } 20% { right: 110%; top: 100%; opacity: 0; } 100% { opacity: 0; } }
 
-/* POND & FLOATING ICONS */
+/* FLOATING ICONS & POND */
 .floating-icon {
-  position: absolute; font-size: 45px; z-index: 2; cursor: pointer; transition: transform 0.3s ease;
+  position: absolute; font-size: 45px; z-index: 20; 
+  cursor: pointer; transition: transform 0.3s ease;
 }
 .floating-icon:hover { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255,255,255,0.6)); }
 
-/* ADDED SUNFLOWERS & PINK LOTUS TO POND */
 .lotus-pond { 
-  bottom: 5%; width: 100%; text-align: center; position: absolute; z-index: 1; 
+  bottom: 2%; width: 100%; text-align: center; position: absolute; z-index: 1; 
   font-size: 45px; letter-spacing: 15px; animation: gentleSway 6s infinite alternate; 
+  white-space: nowrap; /* Keeps pond from breaking into two lines on small phones */
 }
 
 .petal { position: absolute; font-size: 22px; animation: fall 15s infinite linear; opacity: 0.7; z-index: 1; }
 @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.7; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
 @keyframes gentleSway { 0% { transform: translateX(-10px); } 100% { transform: translateX(10px); } }
 
-.heart1 { top: 20%; right: 15%; animation: floatGentle 5s infinite ease-in-out; }
+.heart1 { top: 15%; right: 5%; animation: floatGentle 5s infinite ease-in-out; }
 
-/* THE FROGS */
-.frog-wrapper { position: absolute; animation: floatGentle 6s infinite ease-in-out; cursor: pointer; z-index: 5; }
+/* THE FROGS (Default positioning for Desktop/Laptop) */
+.frog-wrapper { 
+  position: absolute; animation: floatGentle 6s infinite ease-in-out; cursor: pointer; 
+  z-index: 20;
+}
 .frog-wrapper .lilypad { position: absolute; bottom: -15px; left: -5px; font-size: 55px; z-index: -1; }
 .frog-wrapper .frog { font-size: 50px; }
 
-.fw1 { top: 22%; left: 8%; }
-.fw2 { bottom: 18%; right: 10%; animation-delay: 2s; }
+/* Hug the center box on big screens */
+.fw1 { top: 25%; left: calc(50% - 330px); }
+.fw2 { bottom: 20%; right: calc(50% - 330px); animation-delay: 2s; }
 
 @keyframes floatGentle { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
 
@@ -127,58 +142,87 @@ body {
 .boop { animation: popSpin 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; }
 @keyframes popSpin { 0% { transform: scale(1); } 50% { transform: scale(1.3) rotate(15deg); } 100% { transform: scale(1); } }
 
-/* MAIN CONTAINER */
+/* MAIN CONTAINER (Responsive) */
 .container {
-  width: 92%; max-width: 430px; height: 92vh; overflow-y: auto; background: var(--glass-bg);
+  width: 92%; max-width: 420px; 
+  height: auto; max-height: 90dvh; 
+  overflow-y: auto; background: var(--glass-bg);
   backdrop-filter: blur(25px); border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 25px 20px 30px; position: relative; z-index: 10; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
   display: flex; flex-direction: column; align-items: center;
 }
 .container::-webkit-scrollbar { width: 0; }
 
-/* CELESTIAL BODY (Sun/Moon) */
+/* CELESTIAL BODY */
 .celestial {
-  width: 90px; height: 90px; border-radius: 50%; background: var(--celestial-color); margin: 0 auto;
-  display: flex; justify-content: center; align-items: center; font-size: 40px; transition: 1.5s;
+  width: 80px; height: 80px; border-radius: 50%; background: var(--celestial-color); margin: 0 auto;
+  display: flex; justify-content: center; align-items: center; font-size: 35px; transition: 1.5s;
   box-shadow: 0 0 30px var(--celestial-glow); animation: pulse 4s infinite alternate;
 }
 @keyframes pulse { to { transform: scale(1.05); box-shadow: 0 0 45px var(--celestial-glow); } }
 
-/* TYPEWRITER MESSAGE BOX */
+/* MESSAGE BOX */
 .message-box {
   background: var(--card-bg); width: 100%; border-radius: 20px; padding: 15px; margin-top: 15px;
-  min-height: 80px; display: flex; align-items: center; justify-content: center; text-align: center;
-  font-size: 14px; font-weight: 500; color: var(--text-dark); border: 1px dashed rgba(255,255,255,0.5);
+  min-height: 70px; display: flex; align-items: center; justify-content: center; text-align: center;
+  font-size: 13px; font-weight: 500; color: var(--text-dark); border: 1px dashed rgba(255,255,255,0.5);
   line-height: 1.6;
 }
 
 /* CONTROLS */
-.controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; width: 100%; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; width: 100%; }
 .btn {
-  border: none; padding: 10px 15px; border-radius: 20px; background: linear-gradient(145deg, var(--btn-grad-1), var(--btn-grad-2));
-  color: white; font-size: 13px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border: none; padding: 10px 14px; border-radius: 20px; background: linear-gradient(145deg, var(--btn-grad-1), var(--btn-grad-2));
+  color: white; font-size: 12px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .btn:hover { transform: scale(1.05); }
 
 /* BREATHING ORB */
 .orb {
-  width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, var(--btn-grad-1), var(--btn-grad-2));
-  margin: 30px auto 10px; display: flex; justify-content: center; align-items: center; color: white;
+  width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle, var(--btn-grad-1), var(--btn-grad-2));
+  margin: 25px auto 10px; display: flex; justify-content: center; align-items: center; color: white;
   animation: breatheOrb 8s infinite ease-in-out; opacity: 0.9; box-shadow: 0 0 20px var(--btn-grad-1);
 }
 @keyframes breatheOrb { 0% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.4); opacity: 1; } 100% { transform: scale(1); opacity: 0.7; } }
-.breath-text { text-align: center; font-size: 14px; color: var(--text-light); }
+.breath-text { text-align: center; font-size: 13px; color: var(--text-light); }
 
-/* MAGIC FLOAT ANIMATION FOR TAPPED EMOJIS */
+/* MAGIC FLOAT */
 .magic-float {
-  position: absolute;
-  font-size: 35px;
-  z-index: 100;
-  pointer-events: none;
-  transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-  opacity: 1;
+  position: absolute; font-size: 35px; z-index: 100; pointer-events: none;
+  transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1); opacity: 1;
 }
 
+/* --- RESPONSIVE LAYOUT RULES --- */
+
+/* For Tablets (iPads, etc) */
+@media (max-width: 850px) {
+  .fw1 { left: 5%; top: 20%; }
+  .fw2 { right: 5%; bottom: 15%; }
+}
+
+/* For Mobile Phones */
+@media (max-width: 480px) {
+  .container { padding: 20px 15px; width: 95%; max-height: 92dvh; }
+  
+  /* Tuck frogs slightly behind/over the edges so they fit perfectly */
+  .fw1 { left: -3%; top: 18%; transform: scale(0.85); }
+  .fw2 { right: -3%; bottom: 12%; transform: scale(0.85); }
+  
+  /* Make pond slightly smaller so it doesn't run off screen */
+  .lotus-pond { font-size: 30px; bottom: 1%; letter-spacing: 10px; }
+  
+  /* Adjust texts and sizes */
+  h1 { font-size: 22px !important; margin-top: 10px !important; }
+  .orb { margin: 20px auto 10px; width: 80px; height: 80px; }
+  .message-box { font-size: 12px; padding: 12px; min-height: 60px; }
+  .btn { padding: 8px 12px; font-size: 11px; }
+}
+
+/* For Tiny Phones (iPhone SE, etc) */
+@media (max-width: 350px) {
+  .fw1, .fw2 { transform: scale(0.7); }
+  .lotus-pond { font-size: 25px; letter-spacing: 5px; }
+}
 </style>
 </head>
 <body>
@@ -223,7 +267,7 @@ body {
     <button class="btn" onclick="toggleAudio('lofi')">📻 Lo-Fi</button>
   </div>
   
-  <p style="text-align:center; font-size:12px; color:var(--text-light); margin-top:25px; font-style:italic;">
+  <p style="text-align:center; font-size:11px; color:var(--text-light); margin-top:20px; font-style:italic;">
     “A tiny peaceful corner made with care 🧡”
   </p>
 </div>
@@ -250,18 +294,15 @@ const quotes = [
 let isTyping = false;
 
 function tapFrog(element) {
-  // 1. Boop animation
   element.classList.remove('boop');
-  void element.offsetWidth; // trigger reflow
+  void element.offsetWidth; 
   element.classList.add('boop');
   
-  // 2. Play REAL frog croak sound
   let pop = document.getElementById('popSound');
-  pop.volume = 0.5; // Slightly louder so the croak comes through clear
+  pop.volume = 0.5;
   pop.currentTime = 0;
   pop.play().catch(()=>{}); 
 
-  // 3. ✨ MAGIC FEATURE: Spawn Pink Lotus & Sunflower ✨
   const rect = element.getBoundingClientRect();
   const magicEmojis = ['🪷', '🌻'];
   
@@ -269,26 +310,21 @@ function tapFrog(element) {
     let el = document.createElement('div');
     el.innerText = emoji;
     el.className = 'magic-float';
-    // Position them exactly where the frog was clicked
     el.style.left = (rect.left + 15) + 'px';
     el.style.top = (rect.top - 10) + 'px';
     document.body.appendChild(el);
 
-    // Animate them floating up and out
     setTimeout(() => {
-      // Lotus goes left, Sunflower goes right
       const xMove = index === 0 ? -40 : 40; 
       el.style.transform = `translate(${xMove}px, -120px) scale(1.3) rotate(${xMove/2}deg)`;
       el.style.opacity = '0';
     }, 50);
 
-    // Remove from code after animation finishes
     setTimeout(() => {
       el.remove();
     }, 1500);
   });
 
-  // 4. Typewriter effect
   if(isTyping) return;
   isTyping = true;
   const msgBox = document.getElementById('messageBox');
@@ -303,7 +339,7 @@ function tapFrog(element) {
       clearInterval(typing);
       isTyping = false;
     }
-  }, 45); // typing speed
+  }, 45);
 }
 
 // --- AUDIO LOGIC ---
@@ -326,7 +362,7 @@ function toggleAudio(type) {
   }
 }
 
-// --- THEME CYCLING (Day -> Sunset -> Night) ---
+// --- THEME CYCLING ---
 const themes = ['theme-day', 'theme-sunset', 'theme-night'];
 const celestialIcons = ['☀️', '🌅', '🌙'];
 let themeIndex = 0;
@@ -340,7 +376,6 @@ function cycleTheme() {
   document.getElementById('celestial').innerText = celestialIcons[themeIndex];
 }
 
-// --- HEADACHE MODE ---
 function toggleHeadacheMode() {
   document.body.classList.toggle('headache-mode');
 }
@@ -355,7 +390,6 @@ for(let i=0; i<15; i++) {
   document.body.appendChild(firefly);
 }
 
-// Added Sunflowers to the falling petals mix
 const petalEmojis = ['🌸', '🍃', '✨', '🌻', '🪷'];
 setInterval(() => {
   let petal = document.createElement('div');
@@ -368,3 +402,5 @@ setInterval(() => {
 </script>
 </body>
 </html>
+
+```

@@ -1,13 +1,3 @@
-This is the perfect next step. To make sure it looks beautiful no matter what device she opens it on (her phone, a tablet, or a wide laptop screen), we need to make the layout **fully responsive**.
-
-The main issue on laptops is that if the frogs are glued to the edges of the screen, they will be super far away from the center box on a wide monitor. To fix this, I have updated the code so the frogs "hug" the center box perfectly on a laptop, and gracefully tuck themselves into the sides of the glass box on a phone.
-
-Here is the ultimate, fully responsive version. Just copy this whole block and replace your `index.html` code.
-
-*(Note: Don't forget to add that blank `.nojekyll` file to your GitHub repository so GitHub stops injecting that ugly blue "frogandfood" title at the top!)*
-
-```html
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
